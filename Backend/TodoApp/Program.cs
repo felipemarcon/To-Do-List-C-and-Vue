@@ -15,14 +15,9 @@ builder.Services.AddDbContext<TodoContext>(options =>
 // Configure CORS for Vue.js frontend
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowVueApp", policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins(
-            "http://localhost:5173", // Vite
-            "http://localhost:3000", // Vue CLI
-            "http://localhost:5248", // Sua porta do frontend
-            "http://127.0.0.1:5173"
-        )
+        policy.AllowAnyOrigin()
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -38,7 +33,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // Enable CORS
-app.UseCors("AllowVueApp");
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
