@@ -17,7 +17,12 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowVueApp", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "http://localhost:5173", "http://localhost:8080")
+        policy.WithOrigins(
+            "http://localhost:5173", // Vite
+            "http://localhost:3000", // Vue CLI
+            "http://localhost:5248", // Sua porta do frontend
+            "http://127.0.0.1:5173"
+        )
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
